@@ -1,0 +1,257 @@
+DROP TABLE IF EXISTS `shadowhunter_dev`.`action`;
+CREATE TABLE  `shadowhunter_dev`.`action` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `roomround_id` bigint(20) unsigned DEFAULT NULL,
+  `actioner_id` bigint(20) unsigned DEFAULT NULL,
+  `content` varchar(20) DEFAULT NULL,
+  `mtype` varchar(4) DEFAULT NULL,
+  `action_flags` varchar(20) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  `actionee_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `action_roomround_id` (`roomround_id`),
+  KEY `action_actioner_id` (`actioner_id`),
+  KEY `action_actionee_id` (`actionee_id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`adminmanage`;
+CREATE TABLE  `shadowhunter_dev`.`adminmanage` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `param_name` varchar(256) DEFAULT NULL,
+  `param_value` varchar(256) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`article`;
+CREATE TABLE  `shadowhunter_dev`.`article` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `thread_id` bigint(20) unsigned DEFAULT NULL,
+  `uname` varchar(20) DEFAULT NULL,
+  `handle_name` varchar(20) DEFAULT NULL,
+  `trip` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `content` varchar(3000) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `edited_times` int(11) DEFAULT NULL,
+  `ip_address` varchar(20) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `article_thread_id` (`thread_id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`articlethread`;
+CREATE TABLE  `shadowhunter_dev`.`articlethread` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `handle_name` varchar(20) DEFAULT NULL,
+  `trip` varchar(20) DEFAULT NULL,
+  `title` varchar(80) DEFAULT NULL,
+  `articles` int(11) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`cardpool`;
+CREATE TABLE  `shadowhunter_dev`.`cardpool` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `card_no` int(11) DEFAULT NULL,
+  `card_type` varchar(1) DEFAULT NULL,
+  `card` varchar(4) DEFAULT NULL,
+  `owner_id` bigint(20) unsigned DEFAULT NULL,
+  `discarded` tinyint(1) DEFAULT NULL,
+  `flags` varchar(20) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  `room_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `cardpool_owner_id` (`owner_id`),
+  KEY `cardpool_room_id` (`room_id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`room`;
+CREATE TABLE  `shadowhunter_dev`.`room` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `room_name` varchar(20) DEFAULT NULL,
+  `room_comment` varchar(60) DEFAULT NULL,
+  `max_user` int(11) DEFAULT NULL,
+  `move_time` int(11) DEFAULT NULL,
+  `action_time` int(11) DEFAULT NULL,
+  `reaction_time` int(11) DEFAULT NULL,
+  `room_arrange` varchar(10) DEFAULT NULL,
+  `room_flags` varchar(500) DEFAULT NULL,
+  `whitecard_index` int(11) DEFAULT NULL,
+  `blackcard_index` int(11) DEFAULT NULL,
+  `greencard_index` int(11) DEFAULT NULL,
+  `status` varchar(1) DEFAULT NULL,
+  `victory` varchar(1) DEFAULT NULL,
+  `victory_all` varchar(20) DEFAULT NULL,
+  `ip_address` varchar(20) DEFAULT NULL,
+  `talk_time` datetime DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`roomphase`;
+CREATE TABLE  `shadowhunter_dev`.`roomphase` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `roomround_id` bigint(20) unsigned DEFAULT NULL,
+  `phase_no` int(11) DEFAULT NULL,
+  `phase_type` varchar(2) DEFAULT NULL,
+  `phase_subtype` varchar(4) DEFAULT NULL,
+  `player` bigint(20) unsigned DEFAULT NULL,
+  `deadline` datetime DEFAULT NULL,
+  `additional` int(11) DEFAULT NULL,
+  `phase_flags` varchar(20) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `roomphase_roomround_id` (`roomround_id`),
+  KEY `roomphase_player` (`player`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`roomround`;
+CREATE TABLE  `shadowhunter_dev`.`roomround` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `room_id` bigint(20) unsigned DEFAULT NULL,
+  `last_round` bigint(20) unsigned DEFAULT NULL,
+  `round_no` int(11) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `roomround_room_id` (`room_id`),
+  KEY `roomround_last_round` (`last_round`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`talk`;
+CREATE TABLE  `shadowhunter_dev`.`talk` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `roomround_id` bigint(20) unsigned DEFAULT NULL,
+  `actioner_id` bigint(20) unsigned DEFAULT NULL,
+  `cssclass` varchar(20) DEFAULT NULL,
+  `message` varchar(600) DEFAULT NULL,
+  `mtype` varchar(4) DEFAULT NULL,
+  `message_flags` varchar(20) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  `actionee_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `talk_roomround_id` (`roomround_id`),
+  KEY `talk_actioner_id` (`actioner_id`),
+  KEY `talk_actionee_id` (`actionee_id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`user_t`;
+CREATE TABLE  `shadowhunter_dev`.`user_t` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uname` varchar(20) DEFAULT NULL,
+  `handle_name` varchar(20) DEFAULT NULL,
+  `trip` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `sex` varchar(1) DEFAULT NULL,
+  `email` varchar(80) DEFAULT NULL,
+  `msn` varchar(80) DEFAULT NULL,
+  `zodiac` varchar(3) DEFAULT NULL,
+  `user_icon_id` bigint(20) unsigned DEFAULT NULL,
+  `user_score` int(11) DEFAULT NULL,
+  `user_flags` bigint(20) DEFAULT NULL,
+  `created_ip` varchar(20) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  `user_memo` varchar(3000) DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `user_t_user_icon_id` (`user_icon_id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`userentry`;
+CREATE TABLE  `shadowhunter_dev`.`userentry` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `room_id` bigint(20) unsigned DEFAULT NULL,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `user_icon_id` bigint(20) unsigned DEFAULT NULL,
+  `user_no` int(11) DEFAULT NULL,
+  `uname` varchar(20) DEFAULT NULL,
+  `handle_name` varchar(20) DEFAULT NULL,
+  `trip` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `sex` varchar(1) DEFAULT NULL,
+  `role_c` varchar(10) DEFAULT NULL,
+  `subrole` varchar(1) DEFAULT NULL,
+  `damaged` int(11) DEFAULT NULL,
+  `location` varchar(2) DEFAULT NULL,
+  `action_point` int(11) DEFAULT NULL,
+  `cash` int(11) DEFAULT NULL,
+  `live` tinyint(1) DEFAULT NULL,
+  `last_words` varchar(600) DEFAULT NULL,
+  `revealed` tinyint(1) DEFAULT NULL,
+  `revoked` tinyint(1) DEFAULT NULL,
+  `won` tinyint(1) DEFAULT NULL,
+  `ip_address0` varchar(20) DEFAULT NULL,
+  `ip_address` varchar(20) DEFAULT NULL,
+  `ip_address_md5` varchar(34) DEFAULT NULL,
+  `last_round_no` int(11) DEFAULT NULL,
+  `reaction` tinyint(1) DEFAULT NULL,
+  `last_talk` varchar(600) DEFAULT NULL,
+  `target_user` bigint(20) unsigned DEFAULT NULL,
+  `room_flags` varchar(20) DEFAULT NULL,
+  `role_flags` varchar(20) DEFAULT NULL,
+  `user_flags` varchar(80) DEFAULT NULL,
+  `item_flags` varchar(80) DEFAULT NULL,
+  `item_preferred` varchar(10) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `userentry_room_id` (`room_id`),
+  KEY `userentry_user_id` (`user_id`),
+  KEY `userentry_user_icon_id` (`user_icon_id`),
+  KEY `userentry_target_user` (`target_user`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`usericon`;
+CREATE TABLE  `shadowhunter_dev`.`usericon` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `icon_group` int(11) DEFAULT NULL,
+  `icon_gname` varchar(20) DEFAULT NULL,
+  `icon_name` varchar(20) DEFAULT NULL,
+  `icon_filename` varchar(80) DEFAULT NULL,
+  `icon_width` int(11) DEFAULT NULL,
+  `icon_height` int(11) DEFAULT NULL,
+  `color` varchar(7) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `usericon_user_id` (`user_id`)
+) DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `shadowhunter_dev`.`userlogin`;
+CREATE TABLE  `shadowhunter_dev`.`userlogin` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `uname` varchar(20) DEFAULT NULL,
+  `login_type` bigint(20) DEFAULT NULL,
+  `created_ip` varchar(20) DEFAULT NULL,
+  `updatedat` datetime DEFAULT NULL,
+  `createdat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `userlogin_user_id` (`user_id`)
+) DEFAULT CHARSET=utf8;

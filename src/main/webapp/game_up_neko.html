@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="ja"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>汝等是人是狼？[發言]</title>
+<link rel="stylesheet" href="./css/game_up.css">
+<link rel="stylesheet" id="day_night">
+<script type="text/javascript" src="javascript/game_up.js"></script>
+</head>
+<body onLoad="set_focus(); reload_game();">
+<a id="game_top"></a>
+<form method="POST" action="game_play.php?room_no=3542&auto_reload=0#game_top" target="bottom" name="reload_game"></form>
+<form method="POST" action="game_play.php?room_no=3542&auto_reload=0#game_top" target="bottom" class="input-say" name="send" onSubmit="set_focus();">
+<table><tr>
+<td><textarea name="say" rows="3" cols="70" wrap="soft" id="say"></textarea></td>
+<td>
+<input type="submit" onclick="setTimeout(&quot;auto_clear()&quot;, 10)" value="發言/遺言/更新" id="submit"><br>
+<select name="font_type">
+<option value="strong">強勢發言</option>
+<option value="normal" selected>普通發言</option>
+<option value="slightly">稍強發言</option>
+<option value="weak">小聲發言</option>
+<option value="red_strong">強勢發言(紅)</option>
+<option value="blue_strong">強勢發言(藍)</option>
+<option value="red_slightly">稍強發言(紅)</option>
+<option value="blue_slightly">稍強發言(藍)</option>
+<option value="red_normal">普通發言(紅)</option>
+<option value="blue_normal">普通發言(藍)</option>
+<option value="red_weak">小聲發言(紅)</option>
+<option value="blue_weak">小聲發言(藍)</option>
+<script type="text/javascript"> //by幼狼
+  if(true){
+    document.write('<option disabled="disabled">--------------</option>');
+    document.write('<option value="change_name">更改暱稱</option>');
+    document.write('<option value="change_profile">更改自我介紹</option>');
+    document.write('<option value="change_icon">更改頭像、性別</option>');
+  }
+</script>
+<option disabled="disabled">--------------</option>
+<option value="last_words">留下遺言</option>
+</select><br>
+<script type="text/javascript"> 
+document.getElementById("say").onkeydown = function (moz_ev) {
+	var ev = null;
+	if (window.event){
+		ev = window.event;
+	}
+	else{
+		ev = moz_ev;
+	}
+	if (ev != null && ev.ctrlKey && ev.keyCode == 13) {
+		document.getElementById("submit").click();
+	}
+}
+</script>
+[<a class="vote" href="game_vote.php?room_no=3542&auto_reload=0#game_top">投票/行動/開始/放棄被復活</a>]<a class="top-link" href="./" target="_top">TOP</a>
+</td>
+</tr></table>
+</form>
+</body></html>
+
+

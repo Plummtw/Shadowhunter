@@ -1,0 +1,8 @@
+db.class=com.mysql.jdbc.Driver
+db.url=jdbc:mysql://localhost/shadowhunter_dev
+db.user=shadowhunter
+db.pass=shadowhunter0000
+
+mail.host=smtp.gmail.com
+mail.user=shadowhunter
+mail.password=shadowhunter0000
