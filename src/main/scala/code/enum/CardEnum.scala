@@ -52,6 +52,7 @@ object CardEnum extends Enumeration {
   val B_DIABOLIC_RITUAL          = Value("B12")
   val B_BANANA_PEEL             = Value("B13")
   val B_DAGGER                  = Value("B14")
+  val B_LAMIRROR                = Value("B15")
 
   val G_SHADOW_LOSE1           = Value("G01")  
   val G_SHADOW_LOSE2           = Value("G02")
@@ -127,6 +128,7 @@ object CardEnum extends Enumeration {
     B_DIABOLIC_RITUAL          -> BCardDiabolicRitual,
     B_BANANA_PEEL             -> BCardBananaPeel,
     B_DAGGER                  -> BCardDagger,
+    B_LAMIRROR                -> BCardLaMirror,
     
     G_SHADOW_LOSE1           -> GShadowLose1,
     G_SHADOW_LOSE2           -> GShadowLose2,

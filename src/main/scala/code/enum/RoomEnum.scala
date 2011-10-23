@@ -29,6 +29,7 @@ object RoomFlagEnum extends Enumeration {
   val GREENCARD_LIFEUNDER11_2 = Value("G02")
   val WHITECARD_TEA      = Value("W01")
   val BLACKCARD_DAGGER   = Value("B01")
+  val BLACKCARD_LAMIRROR   = Value("B02")
   
   val FLAGNAME_MAP   = Map(
     TEST_MODE      -> "(測)",
@@ -57,6 +58,7 @@ object RoomFlagEnum extends Enumeration {
     GREENCARD_HUNTERHEAL2  -> "[綠1]",
     GREENCARD_LIFEUNDER11_2 -> "[綠2]",
     BLACKCARD_DAGGER  -> "[黑1]",
+    BLACKCARD_LAMIRROR  -> "[黑2]",
     WHITECARD_TEA     -> "[白1]"
   )
   

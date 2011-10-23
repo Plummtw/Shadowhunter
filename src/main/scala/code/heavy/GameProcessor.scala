@@ -36,6 +36,8 @@ object GameProcessor extends Logger{
           var result = CardEnum.BLACK_LIST
           if (room.has_flag(RoomFlagEnum.BLACKCARD_DAGGER))
             result = CardEnum.B_DAGGER :: result
+          if (room.has_flag(RoomFlagEnum.BLACKCARD_LAMIRROR))
+            result = CardEnum.B_LAMIRROR :: result
           result
         case CardTypeEnum.WHITE => 
           var result = CardEnum.WHITE_LIST

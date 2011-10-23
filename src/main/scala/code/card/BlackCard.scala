@@ -56,6 +56,9 @@ object BCardDagger             extends BlackCard(CardEnum.B_DAGGER, "匕首") wi
   override def equip_name = "匕"
 }
 
+object BCardLaMirror            extends BlackCard(CardEnum.B_LAMIRROR, "拉之鏡") with UserEntryTargetable {
+}
+
 
 /*
  * 電鋸、菜刀、斧頭(裝備卡)：

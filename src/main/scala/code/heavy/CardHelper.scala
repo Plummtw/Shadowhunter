@@ -588,6 +588,9 @@ object CardHelper extends Logger {
         
         if (target.inflict_card_damage(3, actioner))
           GameProcessor.check_death(target, actioner, action, userentrys)
+      case CardEnum.B_LAMIRROR          =>
+        if (!actionee.revealed.is)
+          GameProcessor.flip(actionee, action, userentrys)
     }
 
     if (!GameProcessor.check_victory(room, roomround, userentrys)) {
