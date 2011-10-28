@@ -555,8 +555,9 @@ class GameComet extends CometActor with Logger {
       result = result & SetHtml("talk-table", MessageHelper.messages_normal(room, roomround, UserEntrys_R.get, reveal_mode))
     if (updates.contains(ForceUpdateEnum.CARD_TABLE)) 
       result = result & SetHtml("card-table", CardHelper.card_table(room, card_list))
-    if (updates.contains(ForceUpdateEnum.SOUND)) {
-      result = result & JsRaw("playSound(0);")
+    if (updates.contains(ForceUpdateEnum.MUSIC)) {
+      if (S.getSessionAttribute("sound").getOrElse("") == "on")
+        result = result & JsRaw("playSound(0);")
     }
 
     //println(result)
