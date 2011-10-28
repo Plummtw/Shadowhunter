@@ -58,13 +58,19 @@ class ActionData(action: MTypeEnum.Value, str: String) {
   def js_command : JsCmd = Noop
   
   def js_dialog(dialog_name : String) = 
-    S.runTemplate(List("dialog/" + dialog_name)).
-      map(ns => ModalDialog(ns)) openOr
-      Alert("Couldn't find " + dialog_name + " template")
+    if (CurrentUserEntry_R.get == null)
+      Alert("你不在遊戲中，請重新登入")
+    else
+      S.runTemplate(List("dialog/" + dialog_name)).
+        map(ns => ModalDialog(ns)) openOr
+        Alert("Couldn't find " + dialog_name + " template")
       
   def js_action : JsCmd = {
     val roomround = RoomRound_R.get
     val currentuserentry = CurrentUserEntry_R.get
+    
+    if (currentuserentry == null)
+      return Alert("你不在遊戲中，請重新登入")
     
     val action = Action.create.roomround_id(roomround.id.is).actioner_id(currentuserentry.id.is)
                               .mtype(action_enum.toString)
@@ -1078,5 +1084,15 @@ object ActionDetectiveReasonR extends ActionData(MTypeEnum.ACTION_DETECTIVE_REAS
     
     userentrys_rr.filter(x=> (x.id.is != currentuserentry.id.is) && (x.live.is) && (!x.revealed.is))
   }  
+}
+
+object ActionWhiteCardBalance extends ActionData(MTypeEnum.ACTION_WHITECARD_BALANCE, "天秤") with UserEntryTargetable {
+  override def enabled(room: Room, roomround: RoomRound, roomphase:RoomPhase, currentuserentry : UserEntry, userentrys_rr : List[UserEntry]) = {
+    (roomphase.phase_type.is == RoomPhaseEnum.MOVEMENT.toString) &&
+    (roomphase.player.is == currentuserentry.id.is) &&
+    (currentuserentry.has_item(CardEnum.W_BALANCE))
+  }
+  
+  override def js_command : JsCmd = js_dialog("balance_dialog")
 }
 

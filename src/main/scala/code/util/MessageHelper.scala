@@ -160,6 +160,7 @@ object MessageHelper {
           else "但是什麼也沒發生"
         simple_message_tag(message, true, "green-do")
       case MTypeEnum.RESULT_WHITECARD    => simple_message_tag(talk.message.is, true, "white-do")
+      case MTypeEnum.ACTION_WHITECARD_BALANCE  => simple_message_tag(useractioner.handle_name.is + " 對 " + useractionee.handle_name.is + " 使用天秤", true, "white-do") 
       case MTypeEnum.RESULT_BLACKCARD    => simple_message_tag(talk.message.is, true, "black-do")
         
       case MTypeEnum.OBJECTION_MALE                =>

@@ -28,6 +28,7 @@ object RoomFlagEnum extends Enumeration {
   val GREENCARD_HUNTERHEAL2 = Value("G01")
   val GREENCARD_LIFEUNDER11_2 = Value("G02")
   val WHITECARD_TEA      = Value("W01")
+  val WHITECARD_BALANCE  = Value("W02")
   val BLACKCARD_DAGGER   = Value("B01")
   val BLACKCARD_LAMIRROR   = Value("B02")
   
@@ -59,7 +60,8 @@ object RoomFlagEnum extends Enumeration {
     GREENCARD_LIFEUNDER11_2 -> "[綠2]",
     BLACKCARD_DAGGER  -> "[黑1]",
     BLACKCARD_LAMIRROR  -> "[黑2]",
-    WHITECARD_TEA     -> "[白1]"
+    WHITECARD_TEA     -> "[白1]",
+    WHITECARD_BALANCE -> "[白2]"
   )
   
   def flag_name(flag : RoomFlagEnum.Value) = {
@@ -128,6 +130,7 @@ object ForceUpdateEnum extends Enumeration {
   val LOCATION_TABLE  = Value("L")
   val TALK_TABLE      = Value("T")
   val CARD_TABLE      = Value("C")
+  val MUSIC           = Value("M")
 
   implicit def forceupdateenum2String (en : ForceUpdateEnum.Value) : String = en.toString
 }

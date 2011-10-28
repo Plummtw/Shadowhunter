@@ -383,12 +383,24 @@ class GameComet extends CometActor with Logger {
       SetValById("say","") & SetValById("font_type","normal")
     }
     
-    def process_logout = {
+    def set_sound_link = 
+      if (S.getSessionAttribute("sound").getOrElse("") != "on")
+        a(() => set_sound(true), <span>[音效：關]</span>) 
+      else
+        a(() => set_sound(false), <span>[音效：開]</span>) 
+    
+    def set_sound(b : Boolean) : JsCmd = {
+      S.setSessionAttribute("sound", if (b) "on" else "off")
+      SetHtml("set_sound", set_sound_link)
+    }
+    
+    def process_logout(is_force : Boolean) = {
       RoomActor ! RoomUnsubscribe(this, saved_room_id, saved_userentry_id)
       saved_room_id = 0
       saved_userentry_id = 0
       //theSession.destroySession
-      JsCmds.RedirectTo("login.html?command=logout&room_no=" + room.id.is.toString)
+      val force_str = if (is_force) "&force=1" else ""
+      JsCmds.RedirectTo("login.html?command=logout&room_no=" + room.id.is.toString + force_str)
     }
     
     val user_table = UserEntryHelper.user_table(room, roomphase, currentuserentry, userentrys_rr, reveal_mode)
@@ -399,7 +411,9 @@ class GameComet extends CometActor with Logger {
     "#room_no"          #> room.id.is &
     "#room_name"        #> room.room_name.is &
     "#room_comment"     #> room.room_comment.is &
-    "#logout_link"      #> a(() => process_logout, Seq(<span>[登出]</span>)) &
+    "#logout_link"      #> a(() => process_logout(false), Seq(<span>[登出]</span>)) &
+    "#logout_link2"     #> a(() => process_logout(true), Seq(<span>[登出2]</span>)) &
+    "#set_sound *"      #> set_sound_link &
     // <a href={"login.html?command=logout&room_no=" + room.id.is.toString}>[登出]</a>
     "#go_out_link"      #> go_out_link &
     "name=font_type"    #> SHtml.select(Seq(("large","強力發言"),("slightlarge","稍強發言"),("normal","普通發言"),("small","小聲發言")),
@@ -526,8 +540,9 @@ class GameComet extends CometActor with Logger {
     //println("updates : " + updates.toString)
     if (updates.contains(ForceUpdateEnum.GO_OUT_LINK)) 
       result = result & SetHtml("go_out_link", go_out_link)
-    if (updates.contains(ForceUpdateEnum.ACTION_BAR)) 
+    if (updates.contains(ForceUpdateEnum.ACTION_BAR)) {
       result = result & SetHtml("action-bar", action_buttons)
+    } 
     if (updates.contains(ForceUpdateEnum.TIME_TABLE)) 
       result = result & SetHtml("time-table", time_table)
     if (updates.contains(ForceUpdateEnum.USER_TABLE)) {
@@ -540,6 +555,10 @@ class GameComet extends CometActor with Logger {
       result = result & SetHtml("talk-table", MessageHelper.messages_normal(room, roomround, UserEntrys_R.get, reveal_mode))
     if (updates.contains(ForceUpdateEnum.CARD_TABLE)) 
       result = result & SetHtml("card-table", CardHelper.card_table(room, card_list))
+    if (updates.contains(ForceUpdateEnum.SOUND)) {
+      result = result & JsRaw("playSound(0);")
+    }
+
     //println(result)
     result
   }

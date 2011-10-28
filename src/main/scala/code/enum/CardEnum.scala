@@ -37,6 +37,7 @@ object CardEnum extends Enumeration {
   val W_DISENCHANTED_MIRROR   = Value("W14")
   val W_FIRST_AID               = Value("W15")
   val W_TEA                     = Value("W16")
+  val W_BALANCE                 = Value("W17")
 
   val B_CHAINSAW               = Value("B01")
   val B_BUTCHER_KNIFE           = Value("B02")
@@ -70,7 +71,7 @@ object CardEnum extends Enumeration {
   val G_LIFE_UNDER11_2            = Value("G14")
   
   val EQUIPMENT_LIST = List(W_TALISMAN, W_FORTUNE_BROOCH, W_MYSTIC_COMPASS,
-    W_HOLY_ROBE, W_SILVER_ROSARY, W_LANCE_OF_LONGINUS,
+    W_HOLY_ROBE, W_SILVER_ROSARY, W_LANCE_OF_LONGINUS, W_BALANCE,
     B_CHAINSAW, B_BUTCHER_KNIFE, B_RUSTED_BROAD_AXE,
     B_MASAMUNE, B_MACHINE_GUN, B_HANDGUN, B_DAGGER)
   
@@ -113,6 +114,7 @@ object CardEnum extends Enumeration {
     W_DISENCHANTED_MIRROR   -> WCardDisenchantedMirror,
     W_FIRST_AID               -> WCardFirstAid,
     W_TEA                     -> WCardTea,
+    W_BALANCE                 -> WCardBalance,
     
     B_CHAINSAW               -> BCardChainsaw,
     B_BUTCHER_KNIFE           -> BCardButcherKnife,

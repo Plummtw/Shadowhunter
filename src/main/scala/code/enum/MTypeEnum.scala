@@ -59,6 +59,7 @@ object MTypeEnum extends Enumeration {
   val ACTION_LOCROB          = Value("DR")
 
   val ACTION_WHITECARD        = Value("WC")
+  val ACTION_WHITECARD_BALANCE = Value("WC17")
   val ACTION_BLACKCARD        = Value("BC")
   val ACTION_GREENCARD        = Value("GC")
   

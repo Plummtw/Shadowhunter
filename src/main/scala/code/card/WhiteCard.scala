@@ -43,6 +43,10 @@ object WCardFirstAid          extends WhiteCard(CardEnum.W_FIRST_AID, "急救箱
 }
 
 object WCardTea extends WhiteCard(CardEnum.W_TEA, "分解茶")
+
+object WCardBalance extends WhiteCard(CardEnum.W_BALANCE, "天秤") with Equipment {
+  override def equip_name = "秤"
+}
 /*
  * 治療聖水：
 

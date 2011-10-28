@@ -32,7 +32,7 @@ object ActionHelper extends Logger {
       if (roomphase.player.is != currentuserentry.id.is)
         role.free_skill :: List(ActionFlip, ActionItemPreferred)
       else if (roomphase.phase_type.is == RoomPhaseEnum.MOVEMENT.toString)
-        role.free_skill :: role.movement_skill ::: List(ActionFlip, ActionMove, ActionCassandraGive, ActionItemPreferred)
+        role.free_skill :: role.movement_skill ::: List(ActionFlip, ActionMove, ActionCassandraGive, ActionWhiteCardBalance, ActionItemPreferred)
       else if (roomphase.phase_type.is == RoomPhaseEnum.LOCATION.toString) {
         if (roomphase.phase_flags != "")
           List(ActionCardChoose)
@@ -1110,7 +1110,28 @@ object ActionHelper extends Logger {
           RoomActor.sendRoomMessage(actioner.room_id.is, SessionVarSet(room = room, userentrys = userentrys))
           //RoomActor.sendRoomMessage(actioner.room_id.is, RoomForceUpdate(actioner.room_id.is ,List(ForceUpdateEnum.USER_TABLE)))
           RoomActor.sendUserEntryMessage(actioner.id.is, UserEntryForceUpdate(actioner.id.is, List(ForceUpdateEnum.ACTION_BAR)))
-        }   
+        }
+        
+      case MTypeEnum.ACTION_WHITECARD_BALANCE =>
+        //val actioner  = UserEntry.find(By(UserEntry.id, actioner_id)).get
+        val actionee_id = action.actionee_id.is
+        val actionee : UserEntry = UserEntry.get(actionee_id, userentrys)
+
+        actioner.remove_item(CardEnum.W_BALANCE)
+    
+        // 從 CardPool 修改 owner 資訊
+        val card = CardPool.find(By(CardPool.room_id, actioner.room_id.is),
+                                 By(CardPool.card, CardEnum.W_BALANCE.toString)).get
+        card.owner_id(0).discarded(true).save
+        
+        val total_damage = actioner.damaged.is + actionee.damaged.is
+        actioner.damaged(total_damage / 2).save
+        actionee.damaged(total_damage / 2).save
+        roomphase.deadline(PlummUtil.dateAddSecond(new java.util.Date(), room.reaction_time.is)).save
+        
+        GameProcessor.check_death(actioner, actionee, action, userentrys)
+        GameProcessor.check_death(actioner, actioner, action, userentrys)
+        GameProcessor.check_victory(room, roomround, userentrys)
         
       case xs =>
         warn("Unprocessed Action : " + action.toString)

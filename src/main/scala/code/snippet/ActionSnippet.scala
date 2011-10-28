@@ -1094,4 +1094,32 @@ class ActionSnippet extends Logger {
          "reasonr" -> ajaxSubmit("確定", () => { process; Unblock }),
          "cancel" -> <button onclick={Unblock.toJsCmd}>取消</button>))
   }
+  
+  def balance(in: NodeSeq) = {
+    val room : Room = Room_R.get
+    val roomround = RoomRound_R.get
+    val roomphase = RoomPhase_R.get
+    val currentuserentry : UserEntry = CurrentUserEntry_R.get
+    val userentrys_rr = UserEntrys_RR.get
+    
+    var target_str1 : String = ""
+    val targets = ActionWhiteCardBalance.targetable_users(room, roomround, roomphase, currentuserentry, userentrys_rr)
+    
+    
+    def process = {
+      val target_id : Long = try {
+        target_str1.toLong 
+      } catch {case e: Exception => 0}
+      
+      //println("target_str : " + target_str)
+      val action = Action.create.roomround_id(roomround.id.is).mtype(MTypeEnum.ACTION_WHITECARD_BALANCE.toString)
+                         .actioner_id(currentuserentry.id.is).actionee_id(target_id)
+      RoomActor ! SignalAction(action)
+    }
+    
+    ajaxForm(bind("action", in,
+         "user_select_table" -> UserEntryHelper.user_select_table(userentrys_rr, targets, x => (target_str1 = x)),
+         "balance" -> ajaxSubmit("確定", () => { process; Unblock }),
+         "cancel" -> <button onclick={Unblock.toJsCmd}>取消</button>))
+  }
 }

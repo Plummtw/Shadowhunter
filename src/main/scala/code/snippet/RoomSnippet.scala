@@ -168,6 +168,7 @@ class RoomCreateSnippet extends StatefulSnippet with Logger{
     "name=blackcard_dagger" #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.BLACKCARD_DAGGER)) &
     "name=blackcard_lamirror" #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.BLACKCARD_LAMIRROR)) &
     "name=whitecard_tea"    #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.WHITECARD_TEA)) &
+    "name=whitecard_balance"    #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.WHITECARD_BALANCE)) &
     "name=greencard_hunterheal2"  #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.GREENCARD_HUNTERHEAL2)) &
     "name=greencard_lifeunder11_2" #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.GREENCARD_LIFEUNDER11_2)) &
     //"type=submit"         #> SHtml.onSubmitUnit(() => debug("TEST")) 

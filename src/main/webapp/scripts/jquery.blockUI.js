@@ -70,7 +70,7 @@ $.blockUI.defaults = {
         padding:        0,
         margin:         0,
         width:          '70%',
-        top:            '40%',
+        top:            '15%',
         left:           '15%',
         textAlign:      'center',
         color:          '#000',

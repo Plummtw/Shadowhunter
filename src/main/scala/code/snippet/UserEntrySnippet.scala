@@ -334,8 +334,13 @@ class UserEntryLoginSnippet {
     UserEntrys_R.set(List())
     UserEntrys_RR.set(List())
     
-    S.session.open_!.terminateHint 
-    S.redirectTo("game_view.html?room_no=" + room.id.is)
+    if (S.param("force").getOrElse("0") == "1") {
+      S.session.open_!.terminateHint 
+      S.redirectTo("main.html")
+    } else {
+      //S.session.open_!.terminateHint 
+      S.redirectTo("game_view.html?room_no=" + room.id.is)
+    }
   }
   
   // 自刪

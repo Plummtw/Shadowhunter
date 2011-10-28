@@ -43,6 +43,8 @@ object GameProcessor extends Logger{
           var result = CardEnum.WHITE_LIST
           if (room.has_flag(RoomFlagEnum.WHITECARD_TEA))
             result = CardEnum.W_TEA :: result
+          if (room.has_flag(RoomFlagEnum.WHITECARD_BALANCE))
+            result = CardEnum.W_BALANCE :: result
           result
         case CardTypeEnum.GREEN => 
           var result = CardEnum.GREEN_LIST
@@ -953,6 +955,7 @@ object GameProcessor extends Logger{
       } else {
         RoomActor.sendRoomMessage(room.id.is, SessionVarSet(room = room, roomround = new_roomround, roomphase = new_phase, userentrys = userentrys))
         RoomActor.sendRoomMessage(room.id.is, RoomForceUpdate(room.id.is ,List(ForceUpdateEnum.USER_TABLE, ForceUpdateEnum.TALK_TABLE, ForceUpdateEnum.TIME_TABLE, ForceUpdateEnum.ACTION_BAR)))
+        RoomActor.sendUserEntryMessage(next_player.id.is, UserEntryForceUpdate(next_player.id.is ,List(ForceUpdateEnum.MUSIC)))
       }
     }
   }

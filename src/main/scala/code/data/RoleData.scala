@@ -132,8 +132,8 @@ object RoleDavid extends RoleNeutral(RoleEnum.DAVID, "大衛", 13) {
     WCardHolyRobe, WCardSilverRosary, WCardLanceOfLonginus)
 
   def WIN_EQUIPMENT_LIST2 = List(WCardFortuneBrooch, WCardTalisman, 
-    WCardHolyRobe, WCardSilverRosary, WCardLanceOfLonginus, WCardMysticCompass)
-
+    WCardHolyRobe, WCardSilverRosary, WCardLanceOfLonginus, WCardMysticCompass, 
+    WCardBalance)
 }
 
 
