@@ -28,7 +28,7 @@ function playSound(i){
 					var audioSrc = Modernizr.audio.wav ? music[0] : 
 								Modernizr.audio.mp3 ? music[1] : music[2];
 					//alert(audioSrc);
-					document.getElementById("sounds").innerHTML = "<embed width='0' height='0' src='"+audioSrc+"' autostart='true'\></embed>";
+					document.getElementById("sounds").innerHTML = "<audio src='" + audioSrc + "' autoplay='true'></audio>";
 					}else {
 					document.getElementById("sounds").innerHTML = "<embed width='0' height='0' src='"+music[i]+"' autostart='true'\></embed>";
 				}

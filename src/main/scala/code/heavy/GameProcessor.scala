@@ -216,15 +216,18 @@ object GameProcessor extends Logger{
     val neutral_number       = userentrys.length - 2 * shadow_hunter_number
     
     // 先產生職業清單
-    /*
     var all_role_list = RoleEnum.STANDARD_ROLE_LIST
     if (room.has_flag(RoomFlagEnum.EXPANSION_ROLE))
-      all_role_list :::= RoleEnum.EXPANSION_ROLE_LIST
-    if (room.has_flag(RoomFlagEnum.CUSTOM_ROLE))
-      all_role_list :::= RoleEnum.CUSTOM_ROLE_LIST
-    */
+      all_role_list = all_role_list ++ RoleEnum.EXPANSION_ROLE_LIST
+    if (room.has_flag(RoomFlagEnum.CUSTOM_ROLE)) {
+      all_role_list = all_role_list ++ RoleEnum.CUSTOM_ROLE_LIST
+      if (room.has_flag(RoomFlagEnum.NO_CHESHIRE))
+        all_role_list = all_role_list filterNot(_ == RoleEnum.CHESHIRE)
+      if (room.has_flag(RoomFlagEnum.NO_DETECTIVE))
+        all_role_list = all_role_list filterNot(_ == RoleEnum.DETECTIVE)
+    }
    
-    var all_role_list = List(
+    /* var all_role_list = List(
       RoleEnum.VAMPIRE, RoleEnum.WEREWOLF, RoleEnum.EMI, RoleEnum.FRANKLIN, RoleEnum.GEORGE,
       RoleEnum.ALLIE, RoleEnum.BOB, RoleEnum.DANIEL, RoleEnum.ULTRASOUL, RoleEnum.VALKYRIE,
       RoleEnum.AGNES, RoleEnum.BRYAN, RoleEnum.CATHERINE, RoleEnum.ELLEN, RoleEnum.FUKA,
@@ -234,6 +237,7 @@ object GameProcessor extends Logger{
       RoleEnum.BOMB, RoleEnum.EMMA, RoleEnum.FENG, RoleEnum.GODFAT,
           RoleEnum.UNDEAD, RoleEnum.VIPER, RoleEnum.WICKED, RoleEnum.ADECOY, RoleEnum.CHESHIRE,
         RoleEnum.DETECTIVE)
+    */
     
     var java_shadow_list: java.util.List[RoleEnum.Value] = 
       ListBuffer(all_role_list.filter(RoleEnum.get_role(_).role_side == RoleSideEnum.SHADOW): _*)

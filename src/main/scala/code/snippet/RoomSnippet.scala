@@ -148,6 +148,8 @@ class RoomCreateSnippet extends StatefulSnippet with Logger{
     //"name=death_look"     #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.DEATH_LOOK)) &
     "name=expansion_role" #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.EXPANSION_ROLE)) &
     "name=custom_role"    #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.CUSTOM_ROLE)) &
+    "name=no_cheshire"    #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.NO_CHESHIRE)) &
+    "name=no_detective"   #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.NO_DETECTIVE)) &
     "name=init_location"  #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.INIT_LOCATION)) &
     "name=init_green"     #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.INIT_GREEN)) &
     "name=random_position" #> SHtml.checkbox(false, if (_) option_list = option_list ::: List(RoomFlagEnum.RANDOM_POSITION)) &

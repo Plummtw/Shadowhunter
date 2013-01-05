@@ -7,6 +7,9 @@ object RoomFlagEnum extends Enumeration {
   //val DEATH_LOOK     = Value("DL_")
   val EXPANSION_ROLE = Value("R1_")
   val CUSTOM_ROLE     = Value("R2_")
+  val NO_CHESHIRE     = Value("NCR")
+  val NO_DETECTIVE    = Value("NDT")
+
   val INIT_LOCATION     = Value("IL_")
   val INIT_GREEN        = Value("IG_")
   val RANDOM_POSITION   = Value("RP_")
@@ -39,6 +42,9 @@ object RoomFlagEnum extends Enumeration {
     //DEATH_LOOK     -> "(靈)",
     EXPANSION_ROLE -> "(職1)",
     CUSTOM_ROLE    -> "(職2)",
+    NO_CHESHIRE    -> "(無貓)",
+    NO_DETECTIVE    -> "(無莉可)",
+
     INIT_LOCATION   -> "(初位)",
     INIT_GREEN      -> "(初綠)",
     RANDOM_POSITION -> "(亂位)",
